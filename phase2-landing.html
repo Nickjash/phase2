@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase II – Strength & Transformation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:          #f8f9fb;
+    --bg-white:    #ffffff;
+    --bg-section:  #f2f4f8;
+    --accent:      #1d4ed8;
+    --accent-2:    #2563eb;
+    --accent-pale: #eff6ff;
+    --red:         #dc2626;
+    --text:        #111827;
+    --text-mid:    #4b5563;
+    --text-light:  #9ca3af;
+    --border:      #e5e7eb;
+    --gold:        #f59e0b;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 48px;
+    background: rgba(248,249,251,0.95);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+  }
+  .logo { font-weight: 800; font-size: 20px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); }
+  .logo span { color: var(--text); }
+  .nav-cta {
+    background: var(--accent); color: #fff;
+    font-family: 'Poppins', sans-serif; font-weight: 600;
+    font-size: 13px; padding: 11px 22px; border: none; cursor: pointer;
+    text-decoration: none; border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(29,78,216,0.25);
+    transition: background .2s, transform .2s;
+  }
+  .nav-cta:hover { background: var(--accent-2); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    background: var(--bg-white);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at 8% 80%, rgba(29,78,216,0.05) 0%, transparent 55%),
+                radial-gradient(ellipse at 92% 15%, rgba(29,78,216,0.04) 0%, transparent 50%);
+  }
+  .hero-left { padding: 140px 56px 80px 80px; position: relative; z-index: 2; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent-pale); border: 1px solid rgba(29,78,216,0.2); border-radius: 100px;
+    padding: 6px 16px; margin-bottom: 28px;
+    font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent);
+  }
+  .hero-badge::before { content: '●'; font-size: 7px; }
+  .hero-h1 {
+    font-weight: 800; font-size: clamp(40px, 5vw, 70px);
+    line-height: 1.07; letter-spacing: -1.5px; color: var(--text); margin-bottom: 20px;
+  }
+  .hero-h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: 15px; line-height: 1.85; color: var(--text-mid);
+    margin-bottom: 40px; max-width: 430px; font-weight: 400;
+  }
+  .hero-sub strong { color: var(--text); font-weight: 600; }
+  .hero-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--accent); color: #fff;
+    font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 14px;
+    padding: 16px 32px; border: none; cursor: pointer; text-decoration: none;
+    border-radius: 8px; box-shadow: 0 4px 16px rgba(29,78,216,0.28);
+    transition: all .25s;
+  }
+  .btn-primary:hover { background: var(--accent-2); transform: translateY(-2px); }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--text-mid); font-size: 14px; font-weight: 500;
+    text-decoration: none; border-bottom: 1.5px solid var(--border); padding-bottom: 2px;
+    transition: color .2s, border-color .2s;
+  }
+  .btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
+  .hero-stats {
+    display: flex; gap: 36px; margin-top: 52px; padding-top: 36px;
+    border-top: 1px solid var(--border);
+  }
+  .stat { display: flex; flex-direction: column; gap: 2px; }
+  .stat-num { font-weight: 800; font-size: 34px; color: var(--accent); letter-spacing: -1px; line-height: 1; }
+  .stat-label { font-size: 11px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-light); }
+
+  .hero-right { position: relative; height: 100vh; display: flex; align-items: stretch; overflow: hidden; }
+  .hero-img-box { width: 100%; background: linear-gradient(145deg,#dbeafe,#eff6ff); position: relative; overflow: hidden; border-left: 1px solid var(--border); }
+  .trainer-visual {
+    width: 100%; height: 100%;
+    background: linear-gradient(145deg,#dbeafe 0%,#e0eaff 60%,#eff6ff 100%);
+    display: flex; align-items: center; justify-content: center; position: relative;
+  }
+  .trainer-visual::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 38%;
+    background: linear-gradient(to top,rgba(219,234,254,0.75),transparent);
+  }
+  .hero-trainer-card {
+    position: absolute; bottom: 36px; left: 32px; z-index: 10;
+    background: rgba(255,255,255,0.93); backdrop-filter: blur(16px);
+    border: 1px solid var(--border); border-radius: 12px; padding: 18px 22px; max-width: 262px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  }
+  .trainer-name { font-weight: 700; font-size: 17px; color: var(--text); }
+  .trainer-title { font-size: 11px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-light); margin-bottom: 10px; }
+  .trainer-cred { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text-mid); margin-bottom: 4px; }
+  .trainer-cred::before { content: '✦'; color: var(--accent); font-size: 8px; }
+
+  /* TRUST STRIP */
+  .trust-strip {
+    background: var(--accent); padding: 14px 48px;
+    display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap;
+  }
+  .trust-item { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #fff; white-space: nowrap; }
+  .trust-sep { width: 4px; height: 4px; background: rgba(255,255,255,0.35); border-radius: 50%; }
+
+  /* SECTION COMMONS */
+  section { padding: 96px 80px; }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .section-label::before { content: ''; width: 24px; height: 2px; background: var(--accent); border-radius: 2px; }
+  .section-title {
+    font-weight: 800; font-size: clamp(34px, 4vw, 58px);
+    line-height: 1.08; letter-spacing: -1px; margin-bottom: 20px; color: var(--text);
+  }
+  .section-title em { font-style: italic; color: var(--accent); font-weight: 700; }
+
+  /* GOOGLE REVIEWS SCROLLER */
+  .reviews-section {
+    background: var(--bg-white);
+    padding: 80px 0;
+    overflow: hidden;
+  }
+  .reviews-header {
+    text-align: center; padding: 0 80px; margin-bottom: 48px;
+  }
+  .reviews-header .section-label { justify-content: center; }
+  .reviews-header .section-label::before { display: none; }
+  .google-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--bg-section); border: 1px solid var(--border); border-radius: 100px;
+    padding: 8px 18px; margin-bottom: 20px;
+    font-size: 12px; font-weight: 600; color: var(--text-mid);
+  }
+  .reviews-overall {
+    display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 12px;
+  }
+  .overall-score { font-weight: 800; font-size: 40px; color: var(--text); letter-spacing: -1px; }
+  .overall-right { display: flex; flex-direction: column; gap: 2px; }
+  .overall-stars { color: var(--gold); font-size: 20px; letter-spacing: 2px; }
+  .overall-count { font-size: 12px; color: var(--text-light); font-weight: 500; }
+
+  .scroller-wrapper { position: relative; overflow: hidden; }
+  .scroller-wrapper::before,
+  .scroller-wrapper::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 2; pointer-events: none;
+  }
+  .scroller-wrapper::before { left: 0; background: linear-gradient(to right, var(--bg-white), transparent); }
+  .scroller-wrapper::after  { right: 0; background: linear-gradient(to left, var(--bg-white), transparent); }
+
+  .scroller-track {
+    display: flex; gap: 20px;
+    width: max-content;
+    animation: scroll-reviews 40s linear infinite;
+    padding: 8px 0 16px;
+  }
+  .scroller-track:hover { animation-play-state: paused; }
+
+  @keyframes scroll-reviews {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .review-card {
+    width: 310px; flex-shrink: 0;
+    background: var(--bg-white); border: 1px solid var(--border); border-radius: 14px;
+    padding: 22px 22px 18px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: box-shadow .2s, transform .2s; cursor: default;
+  }
+  .review-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.1); transform: translateY(-3px); }
+  .review-top { display: flex; align-items: center; gap: 11px; margin-bottom: 12px; }
+  .reviewer-avatar {
+    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 15px; color: #fff;
+  }
+  .reviewer-name { font-weight: 600; font-size: 13px; color: var(--text); }
+  .reviewer-meta { font-size: 11px; color: var(--text-light); margin-top: 1px; }
+  .review-stars { color: var(--gold); font-size: 13px; letter-spacing: 1px; margin-bottom: 8px; }
+  .review-text { font-size: 13px; line-height: 1.75; color: var(--text-mid); }
+  .review-via {
+    display: flex; align-items: center; gap: 6px; margin-top: 12px;
+    font-size: 11px; color: var(--text-light); font-weight: 500;
+  }
+  .g-icon { display: inline-flex; }
+
+  /* PROBLEM */
+  .problem { background: var(--bg-section); }
+  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .problem-copy p { font-size: 15px; line-height: 1.85; color: var(--text-mid); margin-bottom: 20px; }
+  .problem-copy p strong { color: var(--text); font-weight: 600; }
+  .pain-points { display: flex; flex-direction: column; gap: 12px; }
+  .pain-point {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 16px 18px; background: var(--bg-white);
+    border: 1px solid var(--border); border-left: 3px solid var(--red); border-radius: 8px;
+    transition: box-shadow .2s;
+  }
+  .pain-point:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.06); }
+  .pain-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .pain-text { font-size: 13px; line-height: 1.65; color: var(--text-mid); }
+  .pain-text strong { color: var(--text); font-weight: 600; display: block; margin-bottom: 2px; }
+
+  /* SYSTEM */
+  .system { background: var(--bg-white); }
+  .system-intro { max-width: 560px; margin-bottom: 52px; }
+  .system-intro p { font-size: 15px; line-height: 1.85; color: var(--text-mid); }
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .pillar {
+    background: var(--bg-section); border: 1px solid var(--border); border-radius: 12px;
+    padding: 32px 26px; position: relative; overflow: hidden;
+    transition: box-shadow .25s, transform .25s, border-color .25s;
+  }
+  .pillar:hover { box-shadow: 0 8px 28px rgba(29,78,216,0.10); transform: translateY(-4px); border-color: rgba(29,78,216,0.2); }
+  .pillar-num {
+    position: absolute; right: 18px; top: 14px;
+    font-weight: 800; font-size: 52px; letter-spacing: -2px;
+    color: rgba(29,78,216,0.06); line-height: 1;
+  }
+  .pillar-icon { font-size: 26px; margin-bottom: 14px; }
+  .pillar-title { font-weight: 700; font-size: 17px; color: var(--text); margin-bottom: 10px; line-height: 1.3; }
+  .pillar-body { font-size: 13px; line-height: 1.75; color: var(--text-mid); }
+  .pillar-features { list-style: none; margin-top: 16px; display: flex; flex-direction: column; gap: 7px; }
+  .pillar-features li { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: var(--text-mid); }
+  .pillar-features li::before { content: '✓'; color: var(--accent); font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+
+  /* ACHIEVES */
+  .achieves { background: var(--bg-section); }
+  .achieves-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .achieves-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 22px 0; }
+  .achieves-list li { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--text-mid); }
+  .achieves-list li::before { content: '✓'; display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; border-radius: 50%; flex-shrink: 0; }
+  .achieves-note { font-size: 13px; color: var(--text-light); font-style: italic; margin-top: 8px; }
+  .achieves-cards { display: flex; flex-direction: column; gap: 16px; }
+  .achieves-card {
+    background: var(--bg-white); border: 1px solid var(--border); border-radius: 12px;
+    padding: 22px 20px; border-top: 3px solid var(--accent);
+    transition: box-shadow .2s;
+  }
+  .achieves-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+  .achieves-card-title { font-weight: 700; font-size: 14px; color: var(--text); margin-bottom: 7px; }
+  .achieves-card-body { font-size: 13px; line-height: 1.7; color: var(--text-mid); }
+  .achieves-card-features { list-style: none; margin-top: 8px; display: flex; flex-direction: column; gap: 5px; }
+  .achieves-card-features li { display: flex; gap: 7px; font-size: 12px; color: var(--text-mid); }
+  .achieves-card-features li::before { content: '→'; color: var(--accent); font-size: 11px; flex-shrink: 0; margin-top: 1px; }
+
+  /* STORY */
+  .story { background: var(--bg-white); }
+  .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center; }
+  .story-quote {
+    font-size: clamp(17px, 1.8vw, 22px); font-weight: 600; font-style: italic;
+    color: var(--accent); line-height: 1.55; margin-bottom: 28px;
+    padding: 22px 26px; background: var(--accent-pale); border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;
+  }
+  .story-body p { font-size: 14px; line-height: 1.9; color: var(--text-mid); margin-bottom: 16px; }
+  .story-body p strong { color: var(--text); font-weight: 600; }
+  .story-sig {
+    margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--border);
+    font-weight: 600; font-size: 15px; color: var(--text); font-style: italic;
+  }
+  .story-sig span { display: block; font-style: normal; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-light); margin-top: 3px; font-weight: 500; }
+  .story-img-main {
+    width: 100%; aspect-ratio: 3/4;
+    background: linear-gradient(145deg,#dbeafe,#eff6ff);
+    border-radius: 16px; position: relative; overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .story-caption {
+    position: absolute; bottom: 20px; left: 18px; right: 18px;
+    background: rgba(255,255,255,0.93); backdrop-filter: blur(10px);
+    border: 1px solid var(--border); border-radius: 10px; padding: 13px 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+  .story-caption strong { font-size: 13px; color: var(--text); display: block; margin-bottom: 3px; }
+  .story-caption p { font-size: 12px; color: var(--text-mid); line-height: 1.5; }
+  .story-pillars { display: flex; flex-direction: column; gap: 9px; margin-top: 18px; }
+  .story-pillar { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; color: var(--text-mid); line-height: 1.55; }
+  .story-pillar-icon { color: var(--accent); font-size: 12px; flex-shrink: 0; margin-top: 3px; }
+
+  /* PROCESS */
+  .process { background: var(--bg-section); }
+  .process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 52px; }
+  .step {
+    background: var(--bg-white); border: 1px solid var(--border); border-radius: 12px; padding: 30px 24px;
+    transition: box-shadow .2s, transform .2s;
+  }
+  .step:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.07); transform: translateY(-3px); }
+  .step-num { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  .step-icon {
+    width: 50px; height: 50px; background: var(--accent-pale); border-radius: 12px;
+    display: flex; align-items: center; justify-content: center; font-size: 20px;
+    margin-bottom: 14px; border: 1px solid rgba(29,78,216,0.12);
+  }
+  .step-title { font-weight: 700; font-size: 17px; color: var(--text); margin-bottom: 10px; line-height: 1.3; }
+  .step-body { font-size: 13px; line-height: 1.75; color: var(--text-mid); }
+  .step-details { list-style: none; margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+  .step-details li { display: flex; align-items: flex-start; gap: 7px; font-size: 12px; color: var(--text-mid); }
+  .step-details li::before { content: '✓'; color: var(--accent); font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+
+  /* OFFER */
+  .offer { background: var(--bg-white); }
+  .offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .offer-includes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; }
+  .include-item {
+    display: flex; align-items: flex-start; gap: 11px;
+    padding: 16px 14px; background: var(--bg-section);
+    border: 1px solid var(--border); border-radius: 10px;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .include-item:hover { border-color: rgba(29,78,216,0.25); box-shadow: 0 2px 8px rgba(29,78,216,0.07); }
+  .include-icon { font-size: 17px; flex-shrink: 0; margin-top: 1px; }
+  .include-title { font-weight: 600; font-size: 12px; color: var(--text); margin-bottom: 2px; }
+  .include-desc { font-size: 11px; color: var(--text-light); line-height: 1.5; }
+
+  .offer-card {
+    background: var(--bg-white); border: 1.5px solid var(--border); border-radius: 16px;
+    padding: 42px 34px; position: relative; overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.09);
+  }
+  .offer-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--accent), #60a5fa);
+    border-radius: 4px 4px 0 0;
+  }
+  .offer-card-label { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .offer-card-title { font-weight: 800; font-size: 24px; letter-spacing: -0.5px; color: var(--text); margin-bottom: 10px; line-height: 1.25; }
+  .offer-card-subtitle { font-size: 13px; color: var(--text-mid); margin-bottom: 26px; line-height: 1.6; }
+  .form-field {
+    width: 100%; background: var(--bg-section);
+    border: 1.5px solid var(--border); border-radius: 8px;
+    color: var(--text); font-family: 'Poppins', sans-serif; font-size: 13px;
+    padding: 12px 15px; margin-bottom: 10px; outline: none;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .form-field::placeholder { color: var(--text-light); }
+  .form-field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(29,78,216,0.08); }
+  .form-select {
+    width: 100%; background: var(--bg-section);
+    border: 1.5px solid var(--border); border-radius: 8px;
+    color: var(--text-mid); font-family: 'Poppins', sans-serif; font-size: 13px;
+    padding: 12px 15px; margin-bottom: 10px; outline: none; cursor: pointer; appearance: none;
+    transition: border-color .2s;
+  }
+  .form-select:focus { border-color: var(--accent); }
+  .form-select option { background: #fff; color: var(--text); }
+  .btn-form {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; background: var(--accent); color: #fff;
+    font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 14px;
+    padding: 17px; border: none; cursor: pointer; margin-top: 6px; border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(29,78,216,0.28);
+    transition: background .2s, transform .2s;
+  }
+  .btn-form:hover { background: var(--accent-2); transform: translateY(-2px); }
+  .form-privacy { font-size: 11px; color: var(--text-light); text-align: center; margin-top: 12px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--text); padding: 48px 80px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo { font-weight: 800; font-size: 20px; letter-spacing: 3px; text-transform: uppercase; color: #fff; margin-bottom: 8px; }
+  .footer-logo span { color: #93c5fd; }
+  .footer-address { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.7; }
+  .footer-links { display: flex; gap: 18px; margin-top: 10px; }
+  .footer-links a { font-size: 11px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color .2s; }
+  .footer-links a:hover { color: #fff; }
+  .footer-right { display: flex; gap: 10px; }
+  .social-link {
+    width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.5); text-decoration: none; transition: all .2s;
+  }
+  .social-link:hover { border-color: #93c5fd; color: #93c5fd; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left > * { animation: fadeUp 0.75s ease both; }
+  .hero-badge   { animation-delay: 0.1s; }
+  .hero-h1      { animation-delay: 0.22s; }
+  .hero-sub     { animation-delay: 0.36s; }
+  .hero-actions { animation-delay: 0.5s; }
+  .hero-stats   { animation-delay: 0.64s; }
+
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .55s ease, transform .55s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px) {
+    nav { padding: 16px 20px; }
+    section { padding: 64px 20px; }
+    .reviews-section { padding: 64px 0; }
+    .reviews-header { padding: 0 20px; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 120px 20px 56px; }
+    .hero-right { height: 340px; }
+    .problem-grid,.story-grid,.offer-grid,.achieves-grid { grid-template-columns: 1fr; gap: 40px; }
+    .pillars,.process-steps,.offer-includes { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 28px; padding: 36px 20px; text-align: center; }
+    .footer-links { justify-content: center; }
+    .trust-strip { gap: 20px; padding: 14px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">PH<span>ASE</span> II</div>
+  <a href="#book" class="nav-cta">Free Session →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">Strength & Transformation · Singapore</div>
+    <h1 class="hero-h1">Lose Fat.<br>Build <em>Real</em> Strength.<br>Feel Energised Again.</h1>
+    <p class="hero-sub">A coaching system built for people in their <strong>30s–50s</strong> who want real results — even with a full-time job, kids, and a life that never slows down.</p>
+    <div class="hero-actions">
+      <a href="#book" class="btn-primary">Get Your Free Consultation →</a>
+      <a href="#story" class="btn-ghost">Meet Ray ↓</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Active Clients</div></div>
+      <div class="stat"><div class="stat-num">20+</div><div class="stat-label">Years Exp.</div></div>
+      <div class="stat"><div class="stat-num">94%</div><div class="stat-label">Results in 12wks</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-box">
+      <div class="trainer-visual">
+        <svg width="160" height="260" viewBox="0 0 160 260" fill="none" style="opacity:0.22">
+          <ellipse cx="80" cy="46" rx="34" ry="36" fill="#2563eb"/>
+          <path d="M14 260 Q24 148 80 128 Q136 148 146 260Z" fill="#2563eb"/>
+          <rect x="4" y="138" width="48" height="11" rx="5.5" fill="#2563eb" transform="rotate(-15 28 143)"/>
+          <rect x="108" y="138" width="48" height="11" rx="5.5" fill="#2563eb" transform="rotate(15 132 143)"/>
+        </svg>
+      </div>
+    </div>
+    <div class="hero-trainer-card">
+      <div class="trainer-name">Ray Takeo</div>
+      <div class="trainer-title">Founder · Phase II Training System</div>
+      <div class="trainer-cred">20+ years personal training</div>
+      <div class="trainer-cred">50+ clients transformed</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-item">94% see results in 12 weeks</div>
+  <div class="trust-sep"></div>
+  <div class="trust-item">Joint-friendly programming</div>
+  <div class="trust-sep"></div>
+  <div class="trust-item">2–3 sessions per week</div>
+  <div class="trust-sep"></div>
+  <div class="trust-item">MAX OUT Fitness Raffles</div>
+</div>
+
+<!-- GOOGLE REVIEWS SCROLLER -->
+<div class="reviews-section">
+  <div class="reviews-header reveal">
+    <div class="section-label" style="justify-content:center;margin-bottom:12px">
+      <span style="width:0"></span>What Clients Say
+    </div>
+    <h2 class="section-title" style="font-size:clamp(28px,3.5vw,46px);margin-bottom:16px">Trusted by busy Singaporeans</h2>
+    <div class="google-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" class="g-icon"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Google Reviews · 5.0 ★
+    </div>
+    <div class="reviews-overall">
+      <div class="overall-score">5.0</div>
+      <div class="overall-right">
+        <div class="overall-stars">★★★★★</div>
+        <div class="overall-count">Verified Google reviews</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroller-wrapper">
+    <div class="scroller-track" id="reviewTrack">
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#4285f4">T</div>
+          <div><div class="reviewer-name">Trisha Pang</div><div class="reviewer-meta">3 months ago · Local Guide</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"I've been training with Ray for the past year. He is the best coach I've had. The care and detailed guidance is consistent in every session. Combined with nutrition advice, it's the best investment I've made."</div>
+        <div class="review-via"><svg width="12" height="12" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> Posted on Google</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#34a853">J</div>
+          <div><div class="reviewer-name">Jun Biao</div><div class="reviewer-meta">1 year ago · Regular</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"I started training with Ray since July 2021. Huge progress in my athletic life. Had a knee injury — Ray helps me focus on strengthening it properly. My muscles are finally activated and I'm much stronger."</div>
+        <div class="review-via"><svg width="12" height="12" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> Posted on Google</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#ea4335">S</div>
+          <div><div class="reviewer-name">Scout Diwan</div><div class="reviewer-meta">6 months ago</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Training with Ray focusing on athleticism has been thorough — covering strength and mobility. I can see huge progress in my legs and the other trainers are noticing too. Complete game changer."</div>
+        <div class="review-via"><svg width="12" height="12" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> Posted on Google</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#9333ea">M</div>
+          <div><div class="reviewer-name">Michelle Lim</div><div class="reviewer-meta">2 months ago</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"As a working mum in my 40s, I was skeptical I could see real results. 12 weeks in and I'm stronger than in my 30s. The nutrition guidance was practical — nothing I had to completely overhaul my life for."</div>
+        <div class="review-via"><svg width="12" height="12" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> Posted on Google</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#f59e0b">D</div>
+          <div><div class="reviewer-name">David Tan</div><div class="reviewer-meta">5 months ago · Local Guide</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Been training with Ray for 8 months. My lower back pain that I had for years is basically gone. He adjusts every session based on how I'm feeling that day. Genuinely the best PT I've worked with in Singapore."</div>
+        <div class="review-via"><svg width="12" height="12" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> Posted on Google</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-top">
+          <div class="reviewer-avatar" style="background:#0891b2">C</div>
+          <div><div class="reviewer-name">Clara Wong</div><div class="reviewer-meta">4 months ago</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"I've tried multiple trainers but always fell off after a few weeks. With Ray, the accountability system keeps me consistent. The WhatsApp check-ins between sessions make a huge difference — feels like someone genuinely invested in your progress."</div>
+        <div class="review-via"><svg width="12" height="12" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> Posted on Google</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="problem-grid">
+    <div class="problem-copy reveal">
+      <div class="section-label">The Real Problem</div>
+      <h2 class="section-title">Your body doesn't respond <em>the same way</em></h2>
+      <p>You're showing up. You're doing the sessions. Yet the shape you expect never quite returns.</p>
+      <p>Most adults experience this at some point — <strong>not because they've lost discipline,</strong> but because life now carries more weight.</p>
+      <p>Athletes organise life around training. You train in between everything else. That's where most appearance-focused plans quietly stop working.</p>
+    </div>
+    <div class="pain-points reveal">
+      <div class="pain-point"><div class="pain-icon">😓</div><div class="pain-text"><strong>Cortisol runs higher</strong>Constant work stress makes fat loss harder — physiologically, not just mentally.</div></div>
+      <div class="pain-point"><div class="pain-icon">⚡</div><div class="pain-text"><strong>Mileage builds in your joints</strong>Your knees, tendons and lower back carry accumulated wear. Generic training breaks you down.</div></div>
+      <div class="pain-point"><div class="pain-icon">🌙</div><div class="pain-text"><strong>Recovery slows down</strong>Sleep gets lighter. Long hours sitting or standing. Your body needs a different approach.</div></div>
+      <div class="pain-point"><div class="pain-icon">⚖️</div><div class="pain-text"><strong>Divided attention everywhere</strong>Work, kids, parents, everything. You need a system that fits real life.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SYSTEM -->
+<section class="system">
+  <div class="section-label reveal">The Phase II Method</div>
+  <h2 class="section-title reveal">Three pillars. One <em>sustainable</em> system.</h2>
+  <div class="system-intro reveal">
+    <p>We focus on doing fewer things with more precision and sustainability. Nothing extreme. Nothing you'll quit in three weeks.</p>
+  </div>
+  <div class="pillars">
+    <div class="pillar reveal">
+      <div class="pillar-num">01</div>
+      <div class="pillar-icon">🏋️</div>
+      <div class="pillar-title">Strength Training That Respects Your Joints</div>
+      <div class="pillar-body">Progressive loading built around your body's current condition — not some generic programme.</div>
+      <ul class="pillar-features">
+        <li>Joint-friendly movements & form-first progressions</li>
+        <li>Posture, flexibility, stability and control</li>
+        <li>Appropriate loading for your condition</li>
+        <li>You should feel stronger — not broken</li>
+      </ul>
+    </div>
+    <div class="pillar reveal">
+      <div class="pillar-num">02</div>
+      <div class="pillar-icon">🥗</div>
+      <div class="pillar-title">Nutrition That Fits Work, Family & Real Life</div>
+      <div class="pillar-body">Simple, repeatable structures — not rules you'll abandon the moment work gets busy.</div>
+      <ul class="pillar-features">
+        <li>Simple, repeatable meal structures</li>
+        <li>Flexible guidelines instead of rigid rules</li>
+        <li>Protein anchors for strength & recovery</li>
+        <li>Adjustments for travel, late nights, family life</li>
+      </ul>
+    </div>
+    <div class="pillar reveal">
+      <div class="pillar-num">03</div>
+      <div class="pillar-icon">📊</div>
+      <div class="pillar-title">Accountability That Adjusts With Your Season</div>
+      <div class="pillar-body">Motivation isn't the issue — bandwidth is. We keep you moving when life gets in the way.</div>
+      <ul class="pillar-features">
+        <li>Weekly check-ins & strength tracking</li>
+        <li>Form feedback when needed</li>
+        <li>Targets set around your real schedule</li>
+        <li>Programme adjustments when life gets messy</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT PHASE II ACHIEVES -->
+<section class="achieves">
+  <div class="achieves-grid">
+    <div class="reveal">
+      <div class="section-label">What You'll Achieve</div>
+      <h2 class="section-title">A body that actually <em>supports</em> you</h2>
+      <p style="font-size:14px;line-height:1.85;color:var(--text-mid)">Not just one that looks good for a few weeks. All with 2–3 structured sessions a week.</p>
+      <ul class="achieves-list">
+        <li>Drop stubborn fat</li>
+        <li>Build visible, durable strength</li>
+        <li>Move without tightness and aches</li>
+        <li>Regain daily energy and focus</li>
+        <li>Feel in control of your body again</li>
+        <li>Stack resilience for the next 10–20 years</li>
+      </ul>
+      <p class="achieves-note">We focus on fewer things — with more precision and sustainability.</p>
+    </div>
+    <div class="achieves-cards reveal">
+      <div class="achieves-card">
+        <div class="achieves-card-title">🏋️ Strength Training That Respects Your Joints & Recovery</div>
+        <div class="achieves-card-body">You should feel stronger after training — not broken.</div>
+        <ul class="achieves-card-features">
+          <li>Joint-friendly movements, form-first progressions</li>
+          <li>No "smash yourself and hope for the best" sessions</li>
+        </ul>
+      </div>
+      <div class="achieves-card">
+        <div class="achieves-card-title">🥗 Nutrition That Fits Around Work, Family & Real Life</div>
+        <div class="achieves-card-body">Nothing extreme. You don't need perfection — you need something you can keep doing on your busiest weeks.</div>
+        <ul class="achieves-card-features">
+          <li>Simple, repeatable meal structures</li>
+          <li>Adjustments for dinners, late nights, travel</li>
+        </ul>
+      </div>
+      <div class="achieves-card">
+        <div class="achieves-card-title">✅ Accountability That Adjusts With Your Season of Life</div>
+        <div class="achieves-card-body">When your life shifts, your plan shifts with it.</div>
+        <ul class="achieves-card-features">
+          <li>Weekly check-ins & movement tracking</li>
+          <li>Programme adjustments when life gets messy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AS WE GET OLDER -->
+<section style="background:var(--bg-white);padding:96px 80px">
+  <div style="text-align:center;max-width:680px;margin:0 auto 52px" class="reveal">
+    <div class="section-label" style="justify-content:center"><span></span>The Biology of Ageing</div>
+    <h2 class="section-title">As we get older, the rules change —<br>even in <em>the same body.</em></h2>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:36px;max-width:860px;margin:0 auto" class="reveal">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="pain-point"><div class="pain-icon">✗</div><div class="pain-text"><strong>Cortisol runs higher</strong>From constant work and life stress.</div></div>
+      <div class="pain-point"><div class="pain-icon">✗</div><div class="pain-text"><strong>Mileage builds in joints and tendons</strong>And in the lower back.</div></div>
+      <div class="pain-point"><div class="pain-icon">✗</div><div class="pain-text"><strong>Sleep gets lighter and more interrupted</strong>Long hours sitting or on your feet.</div></div>
+      <div class="pain-point"><div class="pain-icon">✗</div><div class="pain-text"><strong>Divided attention</strong>Work, kids, parents and everything else.</div></div>
+    </div>
+    <div style="background:var(--accent-pale);border:1px solid rgba(29,78,216,0.15);border-radius:14px;padding:34px 30px;display:flex;flex-direction:column;justify-content:center">
+      <p style="font-weight:700;font-size:16px;color:var(--text);margin-bottom:18px;line-height:1.45">You still CAN get leaner, stronger, and more energetic. You just need a system that:</p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:12px">
+        <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text-mid)"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:var(--accent);color:#fff;font-size:10px;font-weight:700;border-radius:50%;flex-shrink:0;margin-top:1px">✓</span>Respects higher stress and cortisol</li>
+        <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text-mid)"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:var(--accent);color:#fff;font-size:10px;font-weight:700;border-radius:50%;flex-shrink:0;margin-top:1px">✓</span>Accounts for slower recovery and accumulated mileage</li>
+        <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text-mid)"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:var(--accent);color:#fff;font-size:10px;font-weight:700;border-radius:50%;flex-shrink:0;margin-top:1px">✓</span>Fits around work, family and real responsibilities</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story" id="story" style="background:var(--bg-section)">
+  <div class="story-grid">
+    <div class="story-left reveal">
+      <div class="section-label">Why This System Exists</div>
+      <h2 class="section-title">Meet <em>Ray</em></h2>
+      <div class="story-quote">"Your physical condition going in made your recovery possible."</div>
+      <div class="story-body">
+        <p>A few years ago, Ray woke up from a 49-hour cancer surgery. His doctors told him this.</p>
+        <p>By then, Ray had already been coaching for years. <strong>He didn't survive because of luck — he survived because he went into surgery with a body strong enough to withstand extreme stress.</strong></p>
+        <p>The experience didn't change his training style. It confirmed it. Most working adults underestimate how important their baseline really is. Many wait for a warning sign before taking their health seriously.</p>
+        <p>Phase II was built to close that gap. Not to chase aesthetics. Not to punish the body. But to help people build a physical foundation that can carry the life they actually live.</p>
+      </div>
+      <div class="story-sig">— Ray Takeo <span>Founder, Phase II Strength & Transformation</span></div>
+    </div>
+    <div class="story-right reveal">
+      <div class="story-img-main">
+        <div style="width:100%;height:100%;background:linear-gradient(145deg,#dbeafe,#eff6ff);display:flex;align-items:center;justify-content:center">
+          <svg width="120" height="200" viewBox="0 0 120 200" fill="none" style="opacity:0.25">
+            <ellipse cx="60" cy="35" rx="28" ry="30" fill="#2563eb"/>
+            <path d="M10 200 Q20 110 60 95 Q100 110 110 200Z" fill="#2563eb"/>
+            <rect x="0" y="105" width="45" height="10" rx="5" fill="#2563eb" transform="rotate(-15 20 110)"/>
+            <rect x="75" y="105" width="45" height="10" rx="5" fill="#2563eb" transform="rotate(15 97 110)"/>
+          </svg>
+        </div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(219,234,254,0.5) 0%,transparent 50%)"></div>
+        <div class="story-caption">
+          <strong>49-hour cancer surgery survivor</strong>
+          <p>"This isn't fitness for fun. This is strength for real life."</p>
+        </div>
+      </div>
+      <div class="story-pillars">
+        <div class="story-pillar"><span class="story-pillar-icon">✦</span>Most working adults underestimate how important their baseline really is</div>
+        <div class="story-pillar"><span class="story-pillar-icon">✦</span>Many wait for a warning sign before taking health seriously</div>
+        <div class="story-pillar"><span class="story-pillar-icon">✦</span>By the time something goes wrong, they're already behind</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="section-label reveal">How It Works</div>
+  <h2 class="section-title reveal">Your structured <em>progress</em> framework</h2>
+  <div class="process-steps">
+    <div class="step reveal">
+      <div class="step-num">STEP 01</div>
+      <div class="step-icon">⚖️</div>
+      <div class="step-title">Body Composition Insight</div>
+      <div class="step-body">We assess fat mass and lean tissue so progress isn't misunderstood — not just scale movement.</div>
+      <ul class="step-details">
+        <li>Movement and posture examination</li>
+        <li>Risk and limitation identification</li>
+        <li>Schedule and stress load analysis</li>
+        <li>Realistic 12-week roadmap</li>
+      </ul>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">STEP 02</div>
+      <div class="step-icon">📸</div>
+      <div class="step-title">Visual Change Over Time</div>
+      <div class="step-body">Progress photos reveal shifts that mirrors hide — posture and shape often change before weight does.</div>
+      <ul class="step-details">
+        <li>Consistent progress photo tracking</li>
+        <li>Posture and structural changes monitored</li>
+        <li>Body recomposition assessed visually</li>
+        <li>Feeling familiar in your body again</li>
+      </ul>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">STEP 03</div>
+      <div class="step-icon">📈</div>
+      <div class="step-title">Load & Volume Tracking</div>
+      <div class="step-body">Every session is logged so improvements are intentional — tells us whether your capacity is being restored or overstressed.</div>
+      <ul class="step-details">
+        <li>Session-by-session load logging</li>
+        <li>Volume and progression tracked</li>
+        <li>Capacity vs. overstress assessment</li>
+        <li>Data-driven programme adjustments</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER / BOOK -->
+<section class="offer" id="book" style="background:var(--bg-section)">
+  <div class="offer-grid">
+    <div class="offer-left">
+      <div class="section-label reveal">What You Get</div>
+      <h2 class="section-title reveal">You're not buying sessions.<br>You're getting a <em>system.</em></h2>
+      <p class="reveal" style="font-size:14px;line-height:1.85;color:var(--text-mid);margin-top:8px">A body that actually supports you — not just one that looks good for a few weeks. All with 2–3 structured sessions a week.</p>
+      <div class="offer-includes reveal">
+        <div class="include-item"><div class="include-icon">🏋️</div><div><div class="include-title">1:1 or Small Group Coaching</div><div class="include-desc">Personalised strength programming for you</div></div></div>
+        <div class="include-item"><div class="include-icon">🦵</div><div><div class="include-title">Joint-Friendly Programming</div><div class="include-desc">Respects your body's accumulated mileage</div></div></div>
+        <div class="include-item"><div class="include-icon">🥗</div><div><div class="include-title">Nutrition Guidance</div><div class="include-desc">Structures that fit real life — no rigid rules</div></div></div>
+        <div class="include-item"><div class="include-icon">💬</div><div><div class="include-title">WhatsApp Access</div><div class="include-desc">Support and accountability between sessions</div></div></div>
+        <div class="include-item"><div class="include-icon">✅</div><div><div class="include-title">Weekly Accountability</div><div class="include-desc">Check-ins, form feedback and adjustments</div></div></div>
+        <div class="include-item"><div class="include-icon">🗺️</div><div><div class="include-title">Clear 12-Week Roadmap</div><div class="include-desc">Know exactly where you're headed and why</div></div></div>
+      </div>
+    </div>
+    <div class="offer-right reveal">
+      <div class="offer-card">
+        <div class="offer-card-label">Free Consultation — Worth S$350</div>
+        <div class="offer-card-title">Book Your Free Phase 2 Training Session + Assessment™</div>
+        <div class="offer-card-subtitle">94% of clients see meaningful improvements in strength, fat loss and daily energy within 12 weeks.</div>
+        <input class="form-field" type="text" placeholder="Your full name">
+        <input class="form-field" type="email" placeholder="Your best email">
+        <input class="form-field" type="tel" placeholder="Your phone number">
+        <select class="form-select">
+          <option value="" disabled selected>Which best describes you right now?</option>
+          <option>Want to lose fat and build strength</option>
+          <option>Recovering from injury / joint issues</option>
+          <option>Busy professional, need structure</option>
+          <option>Just getting back into fitness</option>
+          <option>Want to maintain what I have</option>
+        </select>
+        <select class="form-select">
+          <option value="" disabled selected>What made you sign up today?</option>
+          <option>Saw results from someone I know</option>
+          <option>Searched for personal training</option>
+          <option>Social media / Instagram</option>
+          <option>Been meaning to start for a while</option>
+          <option>Health wake-up call</option>
+        </select>
+        <button class="btn-form">Book My Free Session →</button>
+        <div class="form-privacy">Privacy Policy · Terms of Service · No spam, ever.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-logo">PH<span>ASE</span> II</div>
+    <div class="footer-address">MAX OUT Fitness Raffles<br>6 Raffles Quay, Singapore 048580</div>
+    <div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+  </div>
+  <div class="footer-right">
+    <a href="#" class="social-link" title="Instagram">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+    <a href="#" class="social-link" title="Facebook">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+  </div>
+</footer>
+
+<script>
+  // Duplicate cards for seamless infinite loop
+  const track = document.getElementById('reviewTrack');
+  track.innerHTML += track.innerHTML;
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 70);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -28px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
