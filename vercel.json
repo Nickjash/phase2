@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/phase2-landing.html"
+    }
+  ]
+}
